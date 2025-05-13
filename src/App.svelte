@@ -71,6 +71,6 @@
   <div class="links">
     <a href="https://t.me/Yeshub_bot" target="_blank">Bot</a>
     <a href="https://instagram.com/yesvara.ai" target="_blank">Instagram</a>
-    <a href="http://yesvara.com:5680" target="_blank">Automation</a>
+    <a href="http://panel.yesvara.com:5680" target="_blank">Automation</a>
   </div>
 </div>
