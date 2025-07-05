@@ -58,18 +58,81 @@
     background-color: #ffffff20;
     transform: scale(1.05);
   }
+
+  button {
+    background-color: #BE8F0290;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    border: 1px solid #ffffff30;
+    transition: all 0.3s ease;
+    min-width: 150px;
+  }
+
+  button:hover {
+    background-color: #BE8F0220;
+    transform: scale(1.05);
+  }
 </style>
+
+<script>
+  let MainMenu = true;
+  let UseCasesMenu=false;
+
+  function ChangeMenu(mode){
+    if(mode=="usecases"){
+      MainMenu = false;
+      UseCasesMenu=true;
+    } else if(mode=="main"){
+      MainMenu = true;
+      UseCasesMenu=false;
+    }
+  }
+</script>
 
 <div class="container">
   <img src="/logo.png" alt="Yesvara Logo" class="logo" />
   <h1><font style="color:#BE8F02">Attention</font> is here!</h1>
   <p>Empowering smart automation and intelligent agents to enhance your productivity.</p>
 
+{#if MainMenu}
   <div class="links">
-    <a href="https://t.me/Yeshub_bot" target="_blank">Bot</a>
-    <a href="https://instagram.com/yesvara.ai" target="_blank">Instagram</a>
-    <a href="#/interview" >Interview</a>
-    <a href="#/branding" >Branding</a>
-    <a href="https://n8n.yesvara.com" target="_blank">Automation</a>    
+    <button on:click={ChangeMenu("usecases")}>
+      <i class="fas fa-bolt"></i> Use Cases
+    </button>
+    <a href="https://t.me/Yeshub_bot" target="_blank">
+      <i class="fab fa-telegram"></i> Bot
+    </a>
+    <a href="https://instagram.com/yesvara.ai" target="_blank">
+      <i class="fab fa-instagram"></i> Instagram
+    </a>
+    <a href="https://n8n.yesvara.com" target="_blank">
+      <i class="fas fa-robot"></i> Automation
+    </a>
   </div>
+{/if}
+
+{#if UseCasesMenu}
+  <div class="links">
+    <button on:click={ChangeMenu("main")}>
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+    <a href="#/interview">
+      <i class="fas fa-microphone"></i> AI Interview
+    </a>
+    <a href="#/branding">
+      <i class="fas fa-palette"></i> AI Branding
+    </a>
+    <a href="https://t.me/Yeshub_bot" target="_blank">
+      <i class="fas fa-newspaper"></i> AI News
+    </a>
+    <a href="https://t.me/Yeshub_bot" target="_blank">
+      <i class="fas fa-flask"></i> AI Research
+    </a>
+    <a href="https://t.me/Yeshub_bot" target="_blank">
+      <i class="fas fa-comments"></i> AI Chatbot
+    </a>
+  </div>
+{/if}
 </div>
