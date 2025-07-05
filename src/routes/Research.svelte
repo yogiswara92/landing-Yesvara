@@ -1,31 +1,29 @@
 <script lang="ts">
-  //import '../app.css'; 
-  let name = '';
+  let topic = '';
   let brief = '';
   let isSubmitting = false;
   let aiProgress = '';
 
   async function submitToN8n() {
-    if (!name) {
-      alert('Harap lengkapi form sektor bisnis.');
+    if (!topic) {
+      alert('Harap lengkapi topik anda.');
       return;
     }
     isSubmitting = true;
-    aiProgress = 'AI sedang memproses, mohon ditunggu 1-2 menit...';
+    aiProgress = 'AI sedang memproses, mencari berbagai referensi dan menulis artikel. Mohon ditunggu beberapa detik...';
 
-    const res = await fetch('https://n8n.yesvara.com/webhook/brand-submit', {
+    const res = await fetch('https://n8n.yesvara.com/webhook/a8182ef8-5cbb-4d04-aa28-3e3cd590e3c1', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name, brief
+        topic
       })
     });
 
     if (res) {
       const data = await res.json();
-      console.log(data);
-      // console.log(data[0]);
-      aiProgress = data.status || 'AI sedang memproses...';
+      //console.log(data);
+      aiProgress = data[0].output || 'AI sedang memproses...';
       isSubmitting = false;
     } else {
       aiProgress = 'Gagal menghubungi AI';
@@ -46,17 +44,11 @@
 <div class="container">
    <a href="#/" ><img src="/logo.png" alt="Logo" class="logo" /></a>
   <div class="form-section">
-  Intelligent Branding Assistant
+  Do research and create articles! 
     <input
       type="text"
-      placeholder="Business sector / focus"
-      bind:value={name}
-      disabled={isSubmitting}
-    />
-     <textarea
-      type="text-area"
-      placeholder="Short brief about your brand"
-      bind:value={brief}
+      placeholder="Research Topic"
+      bind:value={topic}
       disabled={isSubmitting}
     />
 
@@ -65,7 +57,7 @@
       {isSubmitting ? 'Memproses..' : 'Submit'}
     </button>
 
-    <p class="progress-text">{aiProgress}</p>
+    <p class="progress-text">{@html aiProgress}</p>
   </div>
 </div>
 

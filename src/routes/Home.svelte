@@ -124,10 +124,10 @@
     <a href="#/branding">
       <i class="fas fa-palette"></i> AI Branding
     </a>
-    <a href="https://t.me/Yeshub_bot" target="_blank">
+    <a href="#/news">
       <i class="fas fa-newspaper"></i> AI News
     </a>
-    <a href="https://t.me/Yeshub_bot" target="_blank">
+    <a href="#/research">
       <i class="fas fa-flask"></i> AI Research
     </a>
     <a href="https://t.me/Yeshub_bot" target="_blank">

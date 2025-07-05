@@ -1,31 +1,25 @@
 <script lang="ts">
-  //import '../app.css'; 
   let name = '';
   let brief = '';
   let isSubmitting = false;
   let aiProgress = '';
 
   async function submitToN8n() {
-    if (!name) {
-      alert('Harap lengkapi form sektor bisnis.');
-      return;
-    }
+  
     isSubmitting = true;
-    aiProgress = 'AI sedang memproses, mohon ditunggu 1-2 menit...';
+    aiProgress = 'AI sedang memproses, mengakses dan merangkum berbagai situs berita online, mohon ditunggu beberapa detik...';
 
-    const res = await fetch('https://n8n.yesvara.com/webhook/brand-submit', {
-      method: 'POST',
+    const res = await fetch('https://n8n.yesvara.com/webhook/ca1f26ee-4b1c-457a-99ce-9918cc715076', {
+      method: 'GET',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name, brief
-      })
+      
     });
 
     if (res) {
       const data = await res.json();
       console.log(data);
       // console.log(data[0]);
-      aiProgress = data.status || 'AI sedang memproses...';
+      aiProgress = data[0].webOutput || 'AI sedang memproses...';
       isSubmitting = false;
     } else {
       aiProgress = 'Gagal menghubungi AI';
@@ -46,26 +40,13 @@
 <div class="container">
    <a href="#/" ><img src="/logo.png" alt="Logo" class="logo" /></a>
   <div class="form-section">
-  Intelligent Branding Assistant
-    <input
-      type="text"
-      placeholder="Business sector / focus"
-      bind:value={name}
-      disabled={isSubmitting}
-    />
-     <textarea
-      type="text-area"
-      placeholder="Short brief about your brand"
-      bind:value={brief}
-      disabled={isSubmitting}
-    />
-
+  Trending News Summarization
 
     <button on:click={submitToN8n} disabled={isSubmitting}>
-      {isSubmitting ? 'Memproses..' : 'Submit'}
+      {isSubmitting ? 'Memproses..' : 'Process'}
     </button>
 
-    <p class="progress-text">{aiProgress}</p>
+    <p class="progress-text">{@html aiProgress}</p>
   </div>
 </div>
 
