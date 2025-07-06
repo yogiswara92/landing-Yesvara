@@ -68,7 +68,7 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 98%;
     padding: 0.5rem;
     
   }

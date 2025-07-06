@@ -125,7 +125,7 @@
   }
 </style>
 
-<div class="container" style="margin-bottom:80px">
+<div class="container" style="margin-bottom:40px">
     <div class="chat-page">
     <div class="chat-messages">
         {#each messages as msg}

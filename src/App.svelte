@@ -16,6 +16,6 @@ const routes = {
   };
 </script>
 <div class="header-fixed">
-  <a href="#/" ><img src="/logo.png" alt="Logo" class="logo" /></a>
+  <a href="#/" ><img src="/yesvara-row.png" alt="Logo" class="logo" /></a>
 </div>
  <Router {routes} />
