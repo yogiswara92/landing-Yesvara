@@ -1,7 +1,7 @@
 
 <style>
   :global(body) {
-    margin: 0;
+    margin-top: 0;
     font-family: 'Segoe UI', sans-serif;
     background-color: #01212e;
     color: #ffffff;
@@ -15,7 +15,8 @@
     align-items: center;
     padding: 1rem;
     text-align: center;
-    /* margin-top:-50px; */
+    
+    /* margin-top 10vw = 10% dari width window*/
   }
 
   img.logo {
@@ -30,7 +31,7 @@
 
   p {
     font-size: 1.1rem;
-    max-width: 600px;
+    max-width: 500px;
     margin-bottom: 2rem;
     line-height: 1.6;
   }
@@ -40,7 +41,7 @@
     gap: 1rem;
     flex-wrap: wrap;
     justify-content: center;
-    
+    place-items: bottom;
   }
 
   .links a {
@@ -51,7 +52,7 @@
     color: #ffffff;
     border: 1px solid #ffffff30;
     transition: all 0.3s ease;
-    min-width: 100px;
+    min-width: 200px;
   }
 
   .links a:hover {
@@ -67,7 +68,7 @@
     color: #ffffff;
     border: 1px solid #ffffff30;
     transition: all 0.3s ease;
-    min-width: 150px;
+    min-width: 250px;
   }
 
   button:hover {
@@ -110,6 +111,8 @@
     <a href="https://n8n.yesvara.com" target="_blank">
       <i class="fas fa-robot"></i> Automation
     </a>
+
+    
   </div>
 {/if}
 
@@ -134,5 +137,6 @@
       <i class="fas fa-comments"></i> AI Chatbot
     </a>
   </div>
+  
 {/if}
 </div>
