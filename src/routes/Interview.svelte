@@ -182,10 +182,7 @@
     justify-content: center;
   }
 
-  .logo {
-    max-width: 120px;
-    margin-bottom: 1.5rem;
-  }
+
 
   .question {
     font-size: 1.5rem;
@@ -267,7 +264,6 @@
 </style>
 
 <div class="container">
-   <a href="#/" ><img src="/logo.png" alt="Logo" class="logo" /></a>
 {#if !nameLocked}
     <div class="input-nama" >
       <label for="name">Nama Peserta:</label><br />

@@ -38,7 +38,7 @@
 </svelte:head>
 
 <div class="container">
-   <a href="#/" ><img src="/logo.png" alt="Logo" class="logo" /></a>
+   
   <div class="form-section">
   Trending News Summarization
 

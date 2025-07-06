@@ -1,4 +1,22 @@
 
+<script>
+  import Chatinput from '../component/Chat-input.svelte';
+
+  let MainMenu = true;
+  let UseCasesMenu=false;
+
+  function ChangeMenu(mode){
+    if(mode=="usecases"){
+      MainMenu = false;
+      UseCasesMenu=true;
+    } else if(mode=="main"){
+      MainMenu = true;
+      UseCasesMenu=false;
+    }
+  }
+
+</script>
+
 <style>
   :global(body) {
     margin-top: 0;
@@ -19,10 +37,7 @@
     /* margin-top 10vw = 10% dari width window*/
   }
 
-  img.logo {
-    max-width: 120px;
-    margin-bottom: 1.5rem;
-  }
+  
 
   h1 {
     font-size: 2rem;
@@ -77,23 +92,9 @@
   }
 </style>
 
-<script>
-  let MainMenu = true;
-  let UseCasesMenu=false;
-
-  function ChangeMenu(mode){
-    if(mode=="usecases"){
-      MainMenu = false;
-      UseCasesMenu=true;
-    } else if(mode=="main"){
-      MainMenu = true;
-      UseCasesMenu=false;
-    }
-  }
-</script>
 
 <div class="container">
-  <img src="/logo.png" alt="Yesvara Logo" class="logo" />
+  
   <h1><font style="color:#BE8F02">Attention</font> is here!</h1>
   <p>Empowering smart automation and intelligent agents to enhance your productivity.</p>
 
@@ -111,13 +112,13 @@
     <a href="https://n8n.yesvara.com" target="_blank">
       <i class="fas fa-robot"></i> Automation
     </a>
-
     
+
   </div>
 {/if}
 
 {#if UseCasesMenu}
-  <div class="links">
+  <div class="links" style="margin-bottom: 50px">
     <button on:click={ChangeMenu("main")}>
       <i class="fas fa-arrow-left"></i> Back
     </button>
@@ -139,4 +140,12 @@
   </div>
   
 {/if}
+  
 </div>
+
+<a href="#/chat">
+  <Chatinput />
+</a>
+
+
+

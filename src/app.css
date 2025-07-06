@@ -28,7 +28,7 @@ body {
   place-items: top;
   min-width: 320px;
   min-height: 100vh;
-  
+  bottom: 2rem;
 }
 
 h1 {
@@ -95,11 +95,12 @@ button:focus-visible {
     text-align: center;
     justify-content: center;
     max-width:550px;
-    margin-top:5vw; 
+    margin-top:15vw; 
+    bottom:2rem;
   }
 
   .logo {
-    max-width: 120px;
+    max-width: 100px;
     margin-bottom: 1.5rem;
   }
 
@@ -155,4 +156,14 @@ button:focus-visible {
   .progress-text {
     margin-top: 1rem;
     font-style: italic;
+  }
+
+  .header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #01212e;
+    z-index: 999;
+    padding-top:30px;
   }

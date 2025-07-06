@@ -5,13 +5,17 @@
   import Interview from './routes/Interview.svelte';
   import News from './routes/News.svelte';
   import Research from './routes/Research.svelte';
+  import Chat from './routes/Chat.svelte';
 const routes = {
     '/': Home,
     '/branding': Branding,
     '/interview' : Interview,
     '/news' : News,
-    '/research' : Research
+    '/research' : Research,
+    '/chat' : Chat
   };
 </script>
-
+<div class="header-fixed">
+  <a href="#/" ><img src="/logo.png" alt="Logo" class="logo" /></a>
+</div>
  <Router {routes} />
