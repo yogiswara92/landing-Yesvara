@@ -23,6 +23,12 @@
     }
   }
 
+  function onFocusScroll() {
+    setTimeout(() => {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }, 300); // beri jeda agar keyboard muncul dulu
+  }
+
   onMount(() => {
     if (SpeechRecognition) {
       recognition = new SpeechRecognition();
@@ -88,6 +94,7 @@
   textarea {
     flex: 1;
     background: transparent;
+    color:black;
     border: none;
     outline: none;
     font-size: 1rem;
@@ -123,6 +130,7 @@
       rows="1"
       placeholder="Ask anything..."
       on:input={autoResize}
+      on:focus={onFocusScroll}
     ></textarea>
 
     <button title={isTranscribing ? "Stop Voice" : "Start Voice"} on:click={startVoiceInput}>

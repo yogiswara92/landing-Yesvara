@@ -19,6 +19,7 @@
   afterUpdate(() => {
     bottomRef?.scrollIntoView({ behavior: 'smooth' });
   });
+  
 
   function handleSend(message) {
     if (!message) return;
@@ -125,7 +126,7 @@
   }
 </style>
 
-<div class="container" style="margin-bottom:40px">
+<div class="container" style="margin-bottom:55px">
     <div class="chat-page">
     <div class="chat-messages">
         {#each messages as msg}
@@ -134,7 +135,9 @@
         </div>
         {/each}
     </div>
-    <i style="text-align:left;margin: 15px">{proses}</i>
+    {#if proses}
+        <i style="text-align:left;margin-bottom: 30px">{proses}</i>
+    {/if}
     <div bind:this={bottomRef}></div>
 </div>
   <!-- Komponen input chat -->
