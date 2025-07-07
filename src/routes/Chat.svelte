@@ -90,7 +90,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-   width:100%;
+   width:115%;
    max-width: 600px;
     color: white;
     margin-left:0vw;
@@ -108,7 +108,7 @@
     flex-direction: column;
     gap: 1rem;
    width:100%;
-   margin-left:-15px;
+   margin-left:-40px;
   }
 
   .message {
@@ -124,7 +124,7 @@
     background-color: #0084ff;
     color: white;
     text-align:left;
-    margin-right:-10px;
+    margin-right:-15px;
   }
 
   .message.bot {
