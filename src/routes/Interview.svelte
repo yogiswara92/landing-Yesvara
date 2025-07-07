@@ -222,19 +222,9 @@
     cursor: not-allowed;
   }
 
-  input, select {
-    padding: 0.5rem;
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
-    width: 250px;
-    text-align: center;
-  }
+ 
 
-  input[disabled] {
-    background-color: #ffffff10;
-    color: white;
-    cursor: not-allowed;
-  }
+ 
 
   .timer {
     margin-top: 1rem;
@@ -263,7 +253,7 @@
   }
 </style>
 
-<div class="container">
+<div class="container" style="margin-top:20vh">
 {#if !nameLocked}
     <div class="input-nama" >
       <label for="name">Nama Peserta:</label><br />
@@ -273,7 +263,7 @@
         bind:value={name}
         required
         disabled={nameLocked}
-        style="padding: 0.5rem; border-radius: 8px; border: none; width: 230px;"
+        style="padding: 0.5rem; border-radius: 8px; border: none; width: 230px; height:40px"
         placeholder="Tuliskan nama Anda disini"
       />
     </div>

@@ -112,20 +112,45 @@ button:focus-visible {
     gap: 1rem;
   }
 
-  input, select {
+  select {
     padding: 1rem;
     border-radius: 8px;
     width: 250px;
+    height:50px;
     text-align: left;
     border: none;
+    margin-bottom: 10px;
+    background-color: white;
+    color:black;
+  }
+
+  input {
+    padding: 1rem;
+    border-radius: 8px;
+    width: 250px;
+    height:30px;
+    text-align: left;
+    border: none;
+    margin-bottom: 10px;
+    background-color: white;
+    color:black;
+  }
+
+  input[disabled] {
+    background-color: #ffffff10;
+    color: white;
+    cursor: not-allowed;
   }
 
   textarea {
     padding: 1rem;
     border-radius: 8px;
     width: 250px;
+    height:50px;
     text-align: left;
     border: none;
+    background-color: white;
+    color:black;
   }
 
   button {

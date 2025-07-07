@@ -107,7 +107,8 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-   
+   width:100%;
+   margin-left:-15px;
   }
 
   .message {
@@ -115,6 +116,7 @@
     border-radius: 12px;
     white-space: pre-wrap;
     word-break: break-word;
+    
   }
 
   .message.user {

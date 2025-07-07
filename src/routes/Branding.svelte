@@ -43,7 +43,7 @@
   />
 </svelte:head>
 
-<div class="container">
+<div class="container" style="margin-top:20vh">
   <div class="form-section">
   Intelligent Branding Assistant
     <input
