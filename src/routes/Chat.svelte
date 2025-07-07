@@ -91,6 +91,7 @@
    width:90vw;
    max-width: 600px;
     color: white;
+    margin-left:-10vw;
   }
 
   .chat-messages {
@@ -140,7 +141,7 @@
 }
 </style>
 
-<div class="container" style="margin-bottom:55px">
+<div class="container" style="margin-bottom:55px; width:100%">
     <div class="chat-page">
     <div class="chat-messages">
         {#each messages as msg}
