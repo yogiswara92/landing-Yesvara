@@ -6,7 +6,8 @@
     let proses = "";
     let credential="";
     let bottomRef;
-    
+    let isMobile = false;
+    isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     fetch('https://ipinfo.io/json') // bisa juga tanpa token
     .then(response => response.json())
@@ -86,29 +87,34 @@
 
 <style>
   .chat-page {
+    flex: 1;
     display: flex;
     flex-direction: column;
-   
+   width:100%;
    max-width: 600px;
     color: white;
     margin-left:0vw;
+     margin: 0 auto;
+     padding-bottom: 65px;
   }
 
   .chat-messages {
     flex: 1;
+    flex-grow: 1;
     padding: 1rem;
     overflow-y: auto;
-    max-width: 1700px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+   
   }
 
   .message {
     padding: 0.75rem 1rem;
     border-radius: 12px;
     white-space: pre-wrap;
+    word-break: break-word;
   }
 
   .message.user {
@@ -116,6 +122,7 @@
     background-color: #0084ff;
     color: white;
     text-align:left;
+    margin-right:-10px;
   }
 
   .message.bot {
@@ -123,6 +130,7 @@
     background-color: #2d2d2d;
     color: #ddd;
     text-align:left;
+    margin-left:-10px;
   }
 
   .message.bot p {
@@ -141,7 +149,7 @@
 }
 </style>
 
-<div class="container" style="margin-bottom:55px; width:100%; ">
+<div class="container" style="">
     <div class="chat-page">
     <div class="chat-messages">
         {#each messages as msg}

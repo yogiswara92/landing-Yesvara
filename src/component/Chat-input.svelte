@@ -6,6 +6,8 @@
   let isTranscribing = false;
   let recognition;
   let transcriptText = '';
+  let isMobile = false;
+  isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -25,8 +27,10 @@
 
   function handleKeyDown(event) {
     if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault(); // cegah newline
-      submitChat();
+      if (!isMobile) {
+        event.preventDefault(); // cegah newline
+        submitChat();
+      }
     }
   }
 
