@@ -88,10 +88,10 @@
   .chat-page {
     display: flex;
     flex-direction: column;
-   width:90vw;
+   
    max-width: 600px;
     color: white;
-    margin-left:-10vw;
+    margin-left:0vw;
   }
 
   .chat-messages {
@@ -141,7 +141,7 @@
 }
 </style>
 
-<div class="container" style="margin-bottom:55px; width:100%">
+<div class="container" style="margin-bottom:55px; width:100%; ">
     <div class="chat-page">
     <div class="chat-messages">
         {#each messages as msg}
