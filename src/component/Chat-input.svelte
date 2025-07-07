@@ -23,6 +23,13 @@
     }
   }
 
+  function handleKeyDown(event) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault(); // cegah newline
+      submitChat();
+    }
+  }
+
   function onFocusScroll() {
     setTimeout(() => {
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
@@ -131,6 +138,7 @@
       placeholder="Ask anything..."
       on:input={autoResize}
       on:focus={onFocusScroll}
+      on:keydown={handleKeyDown}
     ></textarea>
 
     <button title={isTranscribing ? "Stop Voice" : "Start Voice"} on:click={startVoiceInput}>

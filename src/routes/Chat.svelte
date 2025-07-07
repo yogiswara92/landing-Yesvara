@@ -88,7 +88,8 @@
   .chat-page {
     display: flex;
     flex-direction: column;
-   
+   width:90vw;
+   max-width: 600px;
     color: white;
   }
 
@@ -96,7 +97,6 @@
     flex: 1;
     padding: 1rem;
     overflow-y: auto;
-    width: 100%;
     max-width: 1700px;
     margin: 0 auto;
     display: flex;
@@ -107,7 +107,6 @@
   .message {
     padding: 0.75rem 1rem;
     border-radius: 12px;
-    max-width: 80%;
     white-space: pre-wrap;
   }
 
@@ -124,6 +123,21 @@
     color: #ddd;
     text-align:left;
   }
+
+  .message.bot p {
+  margin: 0;
+
+}
+
+.message.bot div {
+  margin: 0;
+  padding: 0;
+}
+
+.message.bot strong,
+.message.bot em {
+  color: #BE8F02;
+}
 </style>
 
 <div class="container" style="margin-bottom:55px">
@@ -131,7 +145,7 @@
     <div class="chat-messages">
         {#each messages as msg}
         <div class="message {msg.role}">
-            {msg.text}
+            {@html msg.text}
         </div>
         {/each}
     </div>
