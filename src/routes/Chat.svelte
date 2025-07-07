@@ -58,7 +58,7 @@
             }
             });
         } 
-    console.log(messages);
+    //console.log(messages);
   }
 
   async function submitToN8n(message) {
@@ -75,7 +75,7 @@
     if (res) {
       const data = await res.json();
       //console.log(data);
-      messages = [...messages, { role: 'bot', text: `${data[0].answer}` }];
+      messages = [...messages, { role: 'bot', text: `${data[0].output}` }];
       proses="";
     } else {
       messages = [...messages, { role: 'bot', text: `maaf, boleh dijelaskan lagi?` }];
