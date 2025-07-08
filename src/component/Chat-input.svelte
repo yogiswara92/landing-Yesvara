@@ -85,8 +85,8 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 99vw;
-    padding: 0.2rem;
+    width: 98vw;
+    padding: 0.5rem;
     
   }
 

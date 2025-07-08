@@ -1,5 +1,6 @@
 <script>
     import Chatinput from '../component/Chat-input.svelte';
+    import { getChatWeb } from '../lib/api.js';
     import { afterUpdate } from 'svelte';
 
     let messages = [{ role: 'bot', text: `Hai, Saya Yesvara, AI Agent yang diciptakan oleh Yogiswara. Ada yang bisa saya bantu?` }];
@@ -13,7 +14,7 @@
     .then(response => response.json())
     .then(data => {
         credential=data.ip;
-        getchat();
+        ambilChat();
     });
     
   // Scroll ke anchor div setiap ada update (pesan baru)
@@ -34,19 +35,13 @@
 
   }
 
-  async function getchat() {
+  async function ambilChat() {
 
-    const res = await fetch('https://n8n.yesvara.com/webhook/get-chat-web', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        credential
-      })
-    });
+    const res = await getChatWeb(credential);
 
     if (res) {
-      const data = await res.json();
-      console.log(data);
+      const data = res;
+      //console.log(data);
       //messages = [...messages, { role: 'bot', text: `${data[0].answer}` }];
       data.forEach(item => {
             if (item.message) {
@@ -66,7 +61,8 @@
 
     const res = await fetch('https://n8n.yesvara.com/webhook/b1fb10c2-a566-4266-93f8-b62710af7fbb', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json',
+      'auth':`${import.meta.env.VITE_YESVARA_AUTH}` },
       body: JSON.stringify({
         message,
         credential
@@ -90,7 +86,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-   width:115%;
+   width:100%;
    max-width: 600px;
     color: white;
     margin-left:0vw;
@@ -108,7 +104,7 @@
     flex-direction: column;
     gap: 1rem;
    width:100%;
-   margin-left:-40px;
+   margin-left:-15px;
   }
 
   .message {
@@ -124,7 +120,7 @@
     background-color: #0084ff;
     color: white;
     text-align:left;
-    margin-right:-15px;
+    margin-right:-10px;
   }
 
   .message.bot {
