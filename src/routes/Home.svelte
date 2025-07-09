@@ -27,8 +27,25 @@
 
       // Bersihkan URL dari #access_token
       history.replaceState(null, '', window.location.pathname);
+      getGoogleUserProfile(accessToken);
     }
   });
+
+  async function getGoogleUserProfile(access_token) {
+    const res = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error('Gagal mengambil profil Google');
+    }
+
+    const profile = await res.json();
+    console.log(profile);
+    return profile;
+  }
 
 </script>
 
@@ -127,7 +144,9 @@
     <a href="https://n8n.yesvara.com" target="_blank">
       <i class="fas fa-robot"></i> Automation
     </a>
-    <LoginButton/>
+    {#if localStorage.getItem('access_token')}
+      <LoginButton/>
+    {/if}
 
   </div>
 {/if}
