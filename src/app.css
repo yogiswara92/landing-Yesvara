@@ -28,7 +28,7 @@ body {
   place-items: top;
   min-width: 320px;
   bottom: 2rem;
-  height: 100%;
+  height: 100dvh;
 }
 
 h1 {
@@ -96,8 +96,8 @@ button:focus-visible {
     text-align: center;
     justify-content: center;
     max-width:550px;
-    margin-top:5vw; 
-    bottom:2rem;
+    /* margin-top:5vw;  */
+    /* bottom:2rem; */
   }
 
   .logo {

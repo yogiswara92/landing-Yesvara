@@ -34,7 +34,7 @@
       history.replaceState(null, '', window.location.pathname);
       getGoogleUserProfile(accessToken);
     }
-    
+
     if (localStorage.getItem('access_token')) {
       foto = localStorage.getItem('foto') || foto;
       nama = localStorage.getItem('nama') || nama;
@@ -87,7 +87,6 @@
 <style>
   .layout {
     display: flex;
-    min-height: 100vh;
   }
 
   .sidebar {
@@ -95,7 +94,7 @@
     top: 0px;
     left: 0;
     width: 240px;
-    height: calc(100vh );
+    height: 100dvh;
     background-color: #011b25;
     padding: 1rem;
     border-right: 1px solid #ddd;
