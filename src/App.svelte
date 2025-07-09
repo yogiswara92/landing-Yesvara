@@ -24,6 +24,17 @@
   let sidebarOpen = true;
 
   onMount(() => {
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+    const accessToken = hash.get("access_token");
+
+    if (accessToken) {
+      localStorage.setItem("access_token", accessToken);
+
+      // Bersihkan URL dari #access_token
+      history.replaceState(null, '', window.location.pathname);
+      getGoogleUserProfile(accessToken);
+    }
+    
     if (localStorage.getItem('access_token')) {
       foto = localStorage.getItem('foto') || foto;
       nama = localStorage.getItem('nama') || nama;
@@ -40,6 +51,25 @@
       window.removeEventListener('resize', cekLebarWindow);
     };
   });
+
+  async function getGoogleUserProfile(access_token) {
+    const res = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      }
+    });
+
+    if (!res.ok) {
+      throw new Error('Gagal mengambil profil Google');
+    }
+
+    const profile = await res.json();
+    console.log(profile.email);
+    localStorage.setItem("email", profile.email);
+    localStorage.setItem("foto", profile.picture);
+    localStorage.setItem("nama", profile.name);
+  }
+ 
 
   function toggleSidebar() {
     sidebarOpen = !sidebarOpen;

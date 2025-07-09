@@ -145,38 +145,7 @@
 }
 
 
-  .chat-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    width: 99%;
-    margin: 0 auto;
-    margin-left:20px;
-    padding-bottom: 80px; /* ruang untuk input bar */
-  }
-
-  .chat-input-wrapper {
-    position: fixed;
-    bottom: 0;
-    left: 270px;
-    width: calc(100% - 270px);
-    display: flex;
-    justify-content: center;
-    z-index: 999;
-    padding-bottom: 0.5rem;
-     z-index: 998;
-  }
-
-  @media (max-width: 768px) {
-    .chat-input-wrapper {
-      left: 0;
-      width: 100%;
-    }
-    .chat-wrapper {
-      margin-left:0px;
-    }
-  }
+  
 </style>
 
 <div class="chat-wrapper">

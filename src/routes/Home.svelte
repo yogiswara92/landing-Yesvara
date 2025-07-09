@@ -17,36 +17,7 @@
     }
   }
 
-  onMount(() => {
-    const hash = new URLSearchParams(window.location.hash.slice(1));
-    const accessToken = hash.get("access_token");
-
-    if (accessToken) {
-      localStorage.setItem("access_token", accessToken);
-
-      // Bersihkan URL dari #access_token
-      history.replaceState(null, '', window.location.pathname);
-      getGoogleUserProfile(accessToken);
-    }
-  });
-
-  async function getGoogleUserProfile(access_token) {
-    const res = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
-      headers: {
-        Authorization: `Bearer ${access_token}`
-      }
-    });
-
-    if (!res.ok) {
-      throw new Error('Gagal mengambil profil Google');
-    }
-
-    const profile = await res.json();
-    console.log(profile.email);
-    localStorage.setItem("email", profile.email);
-    localStorage.setItem("foto", profile.picture);
-    localStorage.setItem("nama", profile.name);
-  }
+  
 
 </script>
 
@@ -64,7 +35,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
     text-align: center;
     
     /* margin-top 10vw = 10% dari width window*/
@@ -126,7 +96,7 @@
 </style>
 
 
-<div class="container" style="margin-top:10vh; ">
+<div class="container" >
   
   <h1><font style="color:#BE8F02">Attention</font> is here!</h1>
   <p>Empowering smart automation and intelligent agents to enhance your productivity.</p>
@@ -176,9 +146,12 @@
   
 </div>
 
-<a href="#/chat" style="position: relative;">
-  <Chatinput />
-</a>
+
+<div class="chat-input-wrapper" >
+  <a href="#/chat" style="width:90%" >
+    <Chatinput />
+  </a>
+</div>
 
 
 
