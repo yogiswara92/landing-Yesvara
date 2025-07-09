@@ -1,6 +1,8 @@
 
 <script>
+  import { onMount } from 'svelte';
   import Chatinput from '../component/Chat-input.svelte';
+  import LoginButton from './LoginButton.svelte';
 
   let MainMenu = true;
   let UseCasesMenu=false;
@@ -14,6 +16,19 @@
       UseCasesMenu=false;
     }
   }
+
+  onMount(() => {
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+    const accessToken = hash.get("access_token");
+
+    if (accessToken) {
+      //console.log("Token ditemukan:", accessToken);
+      localStorage.setItem("access_token", accessToken);
+
+      // Bersihkan URL dari #access_token
+      history.replaceState(null, '', window.location.pathname);
+    }
+  });
 
 </script>
 
@@ -112,7 +127,7 @@
     <a href="https://n8n.yesvara.com" target="_blank">
       <i class="fas fa-robot"></i> Automation
     </a>
-    
+    <LoginButton/>
 
   </div>
 {/if}
