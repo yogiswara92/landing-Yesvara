@@ -22,7 +22,6 @@
     const accessToken = hash.get("access_token");
 
     if (accessToken) {
-      //console.log("Token ditemukan:", accessToken);
       localStorage.setItem("access_token", accessToken);
 
       // Bersihkan URL dari #access_token
@@ -43,8 +42,10 @@
     }
 
     const profile = await res.json();
-    console.log(profile);
-    return profile;
+    console.log(profile.email);
+    localStorage.setItem("email", profile.email);
+    localStorage.setItem("foto", profile.picture);
+    localStorage.setItem("nama", profile.name);
   }
 
 </script>
@@ -144,7 +145,7 @@
     <a href="https://n8n.yesvara.com" target="_blank">
       <i class="fas fa-robot"></i> Automation
     </a>
-    {#if localStorage.getItem('access_token')}
+    {#if !localStorage.getItem('access_token')}
       <LoginButton/>
     {/if}
 
