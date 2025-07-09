@@ -145,9 +145,7 @@
     <a href="https://n8n.yesvara.com" target="_blank">
       <i class="fas fa-robot"></i> Automation
     </a>
-    {#if !localStorage.getItem('access_token')}
-      <LoginButton/>
-    {/if}
+    
 
   </div>
 {/if}
@@ -178,7 +176,7 @@
   
 </div>
 
-<a href="#/chat">
+<a href="#/chat" style="position: relative;">
   <Chatinput />
 </a>
 

@@ -183,13 +183,4 @@ button:focus-visible {
     font-style: italic;
   }
 
-  .header-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height:50px;
-    background-color: #01212e;
-    z-index: 999;
-    padding-top:15px;
-  }
+  

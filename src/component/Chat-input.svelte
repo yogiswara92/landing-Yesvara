@@ -82,16 +82,15 @@
 
 <style>
   .chat-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 98vw;
+    width: 100%;
     padding: 0.5rem;
-    
+    display: flex;
+    justify-content: center;
+    background: transparent;
   }
 
   .chat-inner {
-    max-width: 550px;
+    width:100%;
     margin: 0 auto;
     display: flex;
     align-items: flex-end;

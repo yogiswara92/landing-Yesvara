@@ -87,11 +87,9 @@
     display: flex;
     flex-direction: column;
    width:100%;
-   max-width: 600px;
     color: white;
     margin-left:0vw;
      margin: 0 auto;
-     padding-bottom: 65px;
   }
 
   .chat-messages {
@@ -120,7 +118,7 @@
     background-color: #0084ff;
     color: white;
     text-align:left;
-    margin-right:-10px;
+    margin-right:-15px;
   }
 
   .message.bot {
@@ -128,7 +126,7 @@
     background-color: #2d2d2d;
     color: #ddd;
     text-align:left;
-    margin-left:-10px;
+    margin-left:-15px;
   }
 
   .message.bot p {
@@ -145,22 +143,59 @@
 .message.bot em {
   color: #BE8F02;
 }
+
+
+  .chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 99%;
+    margin: 0 auto;
+    margin-left:20px;
+    padding-bottom: 80px; /* ruang untuk input bar */
+  }
+
+  .chat-input-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 270px;
+    width: calc(100% - 270px);
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+    padding-bottom: 0.5rem;
+     z-index: 998;
+  }
+
+  @media (max-width: 768px) {
+    .chat-input-wrapper {
+      left: 0;
+      width: 100%;
+    }
+    .chat-wrapper {
+      margin-left:0px;
+    }
+  }
 </style>
 
-<div class="container" style="">
-    <div class="chat-page">
+<div class="chat-wrapper">
+  <div class="chat-page">
     <div class="chat-messages">
-        {#each messages as msg}
+      {#each messages as msg}
         <div class="message {msg.role}">
-            {@html msg.text}
+          {@html msg.text}
         </div>
-        {/each}
+      {/each}
     </div>
     {#if proses}
-        <i style="text-align:left;margin-bottom: 30px">{proses}</i>
+      <i style="text-align:left;margin-bottom: 30px">{proses}</i>
     {/if}
     <div bind:this={bottomRef}></div>
-</div>
-  <!-- Komponen input chat -->
-  <Chatinput on:send={(e) => handleSend(e.detail)} />
+  </div>
+
+  <!-- Input chat -->
+  <div class="chat-input-wrapper">
+    <Chatinput on:send={(e) => handleSend(e.detail)} />
+  </div>
 </div>
