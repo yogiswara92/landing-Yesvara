@@ -10,12 +10,17 @@
     let isMobile = false;
     isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    fetch('https://ipinfo.io/json') // bisa juga tanpa token
-    .then(response => response.json())
-    .then(data => {
-        credential=data.ip;
+    if (localStorage.getItem('email')){
+        credential = localStorage.getItem('email');
         ambilChat();
-    });
+    }else{
+      fetch('https://ipinfo.io/json') // bisa juga tanpa token
+      .then(response => response.json())
+      .then(data => {
+          credential=data.ip;
+          ambilChat();
+      });
+    }
     
   // Scroll ke anchor div setiap ada update (pesan baru)
   afterUpdate(() => {

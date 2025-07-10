@@ -82,6 +82,15 @@
       sidebarOpen = true;
     }
   }
+
+  function logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('nama');
+    localStorage.removeItem('email');
+    localStorage.removeItem('foto');
+    window.location.href = "#/"; // Redirect ke halaman home
+    location.reload(); // Refresh halaman agar state kembali ke guest
+  }
 </script>
 
 <style>
@@ -152,18 +161,20 @@
   .hamburger {
     display: none;
     position: fixed;
-    top: 10px;
+    top: 15px;
     left: 10px;
     z-index: 1100;
-    background: white;
-    color: black;
+    color: white;
+    background-color:#01212e;
     border: 1px solid #ccc;
     padding: 6px 10px;
     border-radius: 6px;
     cursor: pointer;
     width:50px;
   }
-
+  .hamburger:hover {
+    background-color: #00cec9;
+  }
   .content {
     margin-left: 240px;
     padding: 70px 1rem 1rem;
@@ -224,12 +235,15 @@
   <div class="sidebar {sidebarOpen ? 'open' : 'hidden'}">
     <div class="menu-wrapper">
       <nav>
-        <a href="#/"><i class="fas fa-house"></i> Home</a>
-        <a href="#/branding"><i class="fas fa-palette"></i> Branding</a>
-        <a href="#/interview"><i class="fas fa-microphone"></i> Interview</a>
-        <a href="#/news"><i class="fas fa-newspaper"></i> News</a>
-        <a href="#/research"><i class="fas fa-flask"></i> Research</a>
-        <a href="#/chat"><i class="fas fa-comments"></i> Chat</a>
+        <a href="#/" on:click={toggleSidebar}><i class="fas fa-house"></i> Home</a>
+        <a href="#/branding" on:click={toggleSidebar}><i class="fas fa-palette"></i> Branding</a>
+        <a href="#/interview" on:click={toggleSidebar}><i class="fas fa-microphone"></i> Interview</a>
+        <a href="#/news" on:click={toggleSidebar}><i class="fas fa-newspaper"></i> News</a>
+        <a href="#/research" on:click={toggleSidebar}><i class="fas fa-flask"></i> Research</a>
+        <a href="#/chat" on:click={toggleSidebar}><i class="fas fa-comments"></i> Chat</a>
+        {#if localStorage.getItem('access_token')}
+          <a href="#/" on:click={logout}><i class="fas fa-right-from-bracket"></i> Log Out</a>
+        {/if}
       </nav>
     </div>  
     
