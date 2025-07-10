@@ -7,7 +7,7 @@
   import News from './routes/News.svelte';
   import Research from './routes/Research.svelte';
   import Chat from './routes/Chat.svelte';
-  import { afterUpdate, onMount } from 'svelte';
+  import { onMount } from 'svelte';
 
   const routes = {
     '/': Home,
@@ -21,6 +21,7 @@
   let foto = '/guest.png';
   let nama = 'Guest';
   let email = '';
+  let isLoggedIn = false;
   let sidebarOpen = true;
 
   onMount(() => {
@@ -29,40 +30,24 @@
 
     if (accessToken) {
       localStorage.setItem("access_token", accessToken);
-
-      // Bersihkan URL dari #access_token
       history.replaceState(null, '', window.location.pathname);
       getGoogleUserProfile(accessToken);
+    } else if (localStorage.getItem('access_token')) {
       updateProfile();
     }
 
-    if (localStorage.getItem('access_token')) {
-      updateProfile();
-    }
-
-    // Set status sidebar berdasarkan lebar awal
     cekLebarWindow();
-
-    // Pasang event listener saat resize
     window.addEventListener('resize', cekLebarWindow);
 
-    return () => {
-      window.removeEventListener('resize', cekLebarWindow);
-    };
+    return () => window.removeEventListener('resize', cekLebarWindow);
   });
 
   function updateProfile() {
     foto = localStorage.getItem('foto') || '/guest.png';
     nama = localStorage.getItem('nama') || 'Guest';
     email = localStorage.getItem('email') || '';
+    isLoggedIn = localStorage.getItem('access_token') ? true : false;
   }
-
-  afterUpdate(() => {
-    // Akan jalan setiap ada update DOM — bisa deteksi kalau login baru selesai
-    if (localStorage.getItem('access_token') && nama === 'Guest') {
-      updateProfile(); // ambil ulang data
-    }
-  });
 
   async function getGoogleUserProfile(access_token) {
     const res = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -72,42 +57,32 @@
     });
 
     if (!res.ok) {
-      throw new Error('Gagal mengambil profil Google');
+      console.error('Gagal mengambil profil Google');
+      return;
     }
 
     const profile = await res.json();
-    console.log(profile.email);
     localStorage.setItem("email", profile.email);
     localStorage.setItem("foto", profile.picture);
     localStorage.setItem("nama", profile.name);
-
     updateProfile();
   }
-
-  $: if (localStorage.getItem('access_token') && nama === 'Guest') {
-    updateProfile();
-  }
- 
 
   function toggleSidebar() {
     sidebarOpen = !sidebarOpen;
   }
 
   function cekLebarWindow() {
-    if (window.innerWidth < 768) {
-      sidebarOpen = false;
-    } else {
-      sidebarOpen = true;
-    }
+    sidebarOpen = window.innerWidth >= 768;
   }
 
   function logout() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('nama');
-    localStorage.removeItem('email');
-    localStorage.removeItem('foto');
-    window.location.href = "#/"; // Redirect ke halaman home
-    location.reload(); // Refresh halaman agar state kembali ke guest
+    localStorage.clear();
+    foto = '/guest.png';
+    nama = 'Guest';
+    email = '';
+    isLoggedIn = false;
+    window.location.href = "#/";
   }
 </script>
 
@@ -128,7 +103,6 @@
     z-index: 999;
     overflow-y: auto;
     transition: transform 0.3s ease;
-
     display: flex;
     flex-direction: column;
   }
@@ -175,7 +149,6 @@
     border-radius: 50%;
   }
 
-
   .hamburger {
     display: none;
     position: fixed;
@@ -190,9 +163,11 @@
     cursor: pointer;
     width:50px;
   }
+
   .hamburger:hover {
     background-color: #00cec9;
   }
+
   .content {
     margin-left: 240px;
     padding: 70px 1rem 1rem;
@@ -237,7 +212,6 @@
       margin-left:0px;
       padding-left:0px;
     }
-
   }
 </style>
 
@@ -253,34 +227,33 @@
   <div class="sidebar {sidebarOpen ? 'open' : 'hidden'}">
     <div class="menu-wrapper">
       <nav>
-        <a href="#/" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}} ><i class="fas fa-house"></i> Home</a>
-        <a href="#/branding" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}}><i class="fas fa-palette"></i> Branding</a>
-        <a href="#/interview" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}}><i class="fas fa-microphone"></i> Interview</a>
-        <a href="#/news" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}}><i class="fas fa-newspaper"></i> News</a>
-        <a href="#/research" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}}><i class="fas fa-flask"></i> Research</a>
-        <a href="#/chat" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}}><i class="fas fa-comments"></i> Chat</a>
-        {#if localStorage.getItem('access_token')}
+        <a href="#/" on:click={() => window.innerWidth < 768 && (sidebarOpen = false)}><i class="fas fa-house"></i> Home</a>
+        <a href="#/branding" on:click={() => window.innerWidth < 768 && (sidebarOpen = false)}><i class="fas fa-palette"></i> Branding</a>
+        <a href="#/interview" on:click={() => window.innerWidth < 768 && (sidebarOpen = false)}><i class="fas fa-microphone"></i> Interview</a>
+        <a href="#/news" on:click={() => window.innerWidth < 768 && (sidebarOpen = false)}><i class="fas fa-newspaper"></i> News</a>
+        <a href="#/research" on:click={() => window.innerWidth < 768 && (sidebarOpen = false)}><i class="fas fa-flask"></i> Research</a>
+        <a href="#/chat" on:click={() => window.innerWidth < 768 && (sidebarOpen = false)}><i class="fas fa-comments"></i> Chat</a>
+        {#if isLoggedIn}
           <a href="#/" on:click={logout}><i class="fas fa-right-from-bracket"></i> Log Out</a>
         {/if}
       </nav>
     </div>  
     
-    <div class="profile" >
-    {#if !localStorage.getItem('access_token')}
-      <LoginButton/>
-    {/if}
-    {#if localStorage.getItem('access_token')}
-      <img src={foto} alt="foto" />
-      <div>
-        <div style="font-weight: 600; text-align:left">{nama}</div>
-        <div style="font-size: 0.8rem; color: #ccc;">{email}</div>
-      </div>
-    {/if}
+    <div class="profile">
+      {#if !isLoggedIn}
+        <LoginButton />
+      {:else}
+        <img src={foto} alt="foto" />
+        <div>
+          <div style="font-weight: 600; text-align:left">{nama}</div>
+          <div style="font-size: 0.8rem; color: #ccc;">{email}</div>
+        </div>
+      {/if}
     </div>
   </div>
 
   <!-- Konten utama -->
-  <div class="content" on:click={() => {if (window.innerWidth < 768){(sidebarOpen = false)}}} >
+  <div class="content" on:click={() => window.innerWidth < 768 && (sidebarOpen = false)}>
     <Router {routes} />
   </div>
 </div>
