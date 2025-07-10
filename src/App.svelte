@@ -33,6 +33,7 @@
       // Bersihkan URL dari #access_token
       history.replaceState(null, '', window.location.pathname);
       getGoogleUserProfile(accessToken);
+      updateProfile();
     }
 
     if (localStorage.getItem('access_token')) {
@@ -252,12 +253,12 @@
   <div class="sidebar {sidebarOpen ? 'open' : 'hidden'}">
     <div class="menu-wrapper">
       <nav>
-        <a href="#/" on:click={toggleSidebar}><i class="fas fa-house"></i> Home</a>
-        <a href="#/branding" on:click={toggleSidebar}><i class="fas fa-palette"></i> Branding</a>
-        <a href="#/interview" on:click={toggleSidebar}><i class="fas fa-microphone"></i> Interview</a>
-        <a href="#/news" on:click={toggleSidebar}><i class="fas fa-newspaper"></i> News</a>
-        <a href="#/research" on:click={toggleSidebar}><i class="fas fa-flask"></i> Research</a>
-        <a href="#/chat" on:click={toggleSidebar}><i class="fas fa-comments"></i> Chat</a>
+        <a href="#/" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}} ><i class="fas fa-house"></i> Home</a>
+        <a href="#/branding" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}}><i class="fas fa-palette"></i> Branding</a>
+        <a href="#/interview" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}}><i class="fas fa-microphone"></i> Interview</a>
+        <a href="#/news" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}}><i class="fas fa-newspaper"></i> News</a>
+        <a href="#/research" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}}><i class="fas fa-flask"></i> Research</a>
+        <a href="#/chat" on:click={() => {if (window.innerWidth < 768){((sidebarOpen = false))}}}><i class="fas fa-comments"></i> Chat</a>
         {#if localStorage.getItem('access_token')}
           <a href="#/" on:click={logout}><i class="fas fa-right-from-bracket"></i> Log Out</a>
         {/if}
