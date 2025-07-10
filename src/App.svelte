@@ -7,7 +7,7 @@
   import News from './routes/News.svelte';
   import Research from './routes/Research.svelte';
   import Chat from './routes/Chat.svelte';
-  import { onMount } from 'svelte';
+  import { afterUpdate, onMount } from 'svelte';
 
   const routes = {
     '/': Home,
@@ -36,9 +36,7 @@
     }
 
     if (localStorage.getItem('access_token')) {
-      foto = localStorage.getItem('foto') || foto;
-      nama = localStorage.getItem('nama') || nama;
-      email = localStorage.getItem('email') || '';
+      updateProfile();
     }
 
     // Set status sidebar berdasarkan lebar awal
@@ -50,6 +48,19 @@
     return () => {
       window.removeEventListener('resize', cekLebarWindow);
     };
+  });
+
+  function updateProfile() {
+    foto = localStorage.getItem('foto') || '/guest.png';
+    nama = localStorage.getItem('nama') || 'Guest';
+    email = localStorage.getItem('email') || '';
+  }
+
+  afterUpdate(() => {
+    // Akan jalan setiap ada update DOM — bisa deteksi kalau login baru selesai
+    if (localStorage.getItem('access_token') && nama === 'Guest') {
+      updateProfile(); // ambil ulang data
+    }
   });
 
   async function getGoogleUserProfile(access_token) {
@@ -69,9 +80,7 @@
     localStorage.setItem("foto", profile.picture);
     localStorage.setItem("nama", profile.name);
 
-    foto = localStorage.getItem('foto');
-    nama = localStorage.getItem('nama');
-    email = localStorage.getItem('email');
+    updateProfile();
   }
  
 
