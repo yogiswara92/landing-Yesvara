@@ -68,6 +68,10 @@
     localStorage.setItem("email", profile.email);
     localStorage.setItem("foto", profile.picture);
     localStorage.setItem("nama", profile.name);
+
+    foto = localStorage.getItem('foto');
+    nama = localStorage.getItem('nama');
+    email = localStorage.getItem('email');
   }
  
 
