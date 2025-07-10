@@ -82,6 +82,10 @@
 
     updateProfile();
   }
+
+  $: if (localStorage.getItem('access_token') && nama === 'Guest') {
+    updateProfile();
+  }
  
 
   function toggleSidebar() {
