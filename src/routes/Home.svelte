@@ -36,7 +36,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    
     /* margin-top 10vw = 10% dari width window*/
   }
 
@@ -102,7 +101,7 @@
   <p>Empowering smart automation and intelligent agents to enhance your productivity.</p>
 
 {#if MainMenu}
-  <div class="links">
+  <div class="links" style="margin-bottom: 60px">
     <button on:click={ChangeMenu("usecases")}>
       <i class="fas fa-bolt"></i> Use Cases
     </button>
@@ -121,7 +120,7 @@
 {/if}
 
 {#if UseCasesMenu}
-  <div class="links" style="margin-bottom: 50px">
+  <div class="links" style="margin-bottom: 60px">
     <button on:click={ChangeMenu("main")}>
       <i class="fas fa-arrow-left"></i> Back
     </button>
@@ -148,7 +147,7 @@
 
 
 <div class="chat-input-wrapper" >
-  <a href="#/chat" style="width:90%" >
+  <a href="#/chat" style="width:98%; margin-left:-15px" >
     <Chatinput />
   </a>
 </div>

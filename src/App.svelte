@@ -170,7 +170,7 @@
 
   .content {
     margin-left: 240px;
-    padding: 70px 1rem 1rem;
+    padding: 20px 1rem 1rem;
     flex: 1;
     width: 100%;
   }

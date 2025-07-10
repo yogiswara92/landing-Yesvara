@@ -6,18 +6,21 @@
     let messages = [{ role: 'bot', text: `Hai, Saya Yesvara, AI Agent yang diciptakan oleh Yogiswara. Ada yang bisa saya bantu?` }];
     let proses = "";
     let credential="";
+    let nama="";
     let bottomRef;
     let isMobile = false;
     isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     if (localStorage.getItem('email')){
         credential = localStorage.getItem('email');
+        nama = localStorage.getItem('nama');
         ambilChat();
     }else{
       fetch('https://ipinfo.io/json') // bisa juga tanpa token
       .then(response => response.json())
       .then(data => {
           credential=data.ip;
+          nama="web-guest";
           ambilChat();
       });
     }
@@ -70,7 +73,8 @@
       'auth':`${import.meta.env.VITE_YESVARA_AUTH}` },
       body: JSON.stringify({
         message,
-        credential
+        credential,
+        nama
       })
     });
 
