@@ -89,6 +89,7 @@
     overflow-x: auto;
     white-space: pre;
     font-size:12px;
+    line-height: 1;
   }
 
   :global(code) {
@@ -105,6 +106,7 @@
   :global(table, th, td) {
     border: 1px solid #99999950;
     font-size:12px;
+    line-height: 1;
   }
 
   :global(th, td) {

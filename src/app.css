@@ -213,7 +213,7 @@ button:focus-visible {
     display: flex;
     justify-content: center;
     z-index: 999;
-    padding-bottom: 0.5rem;
+    /* padding-bottom: 0.5rem; */
      z-index: 998;
      /* background-color: yellow; */
   }
