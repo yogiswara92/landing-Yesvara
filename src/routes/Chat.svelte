@@ -103,7 +103,7 @@
   }
 
   :global(table, th, td) {
-    border: 1px solid #999;
+    border: 1px solid #99999950;
     font-size:12px;
   }
 
@@ -112,8 +112,8 @@
     text-align: left;
   }
 
-  th {
-    background-color: #333;
+  :global(th) {
+    background-color: #01212e98;
     color: #fff;
   }
 
