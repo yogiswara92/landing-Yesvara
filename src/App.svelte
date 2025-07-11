@@ -89,6 +89,10 @@
 <style>
   .layout {
     display: flex;
+    /* background-color: bisque; */
+    /* height:2000px; */
+    /* width: calc(99vw - 320px); */
+    
   }
 
   .sidebar {
@@ -169,21 +173,27 @@
   }
 
   .content {
-    margin-left: 240px;
-    padding: 20px 1rem 1rem;
+    margin-left: 260px;
+    justify-content: center;
+    /* padding: 0px 0.5rem 0.5rem; */
+    display:flex;
     flex: 1;
-    width: 100%;
+    /* width: calc(99vw - 290px); */
+    width:100%;
+    /* background-color: aqua; */
+
   }
 
   .header-fixed {
     position: fixed;
     top: 0;
     left: 0;
-    width:100%;
+    width:calc(99vw - 280px);
     text-align:left;
     margin-left:270px;
     height:50px;
     background-color: #01212e;
+    /* background-color: orange; */
     z-index: 999;
     padding-top:15px;
     padding-left:20px;
@@ -199,7 +209,8 @@
     }
 
     .content {
-      margin-left: 0;
+      margin-left: 0px;
+      
     }
 
     .hamburger {

@@ -1,5 +1,7 @@
 
 <script>
+// @ts-nocheck
+
   import { onMount } from 'svelte';
   import Chatinput from '../component/Chat-input.svelte';
   import LoginButton from './LoginButton.svelte';
@@ -25,7 +27,7 @@
   :global(body) {
     margin-top: 0;
     font-family: 'Segoe UI', sans-serif;
-    background-color: #01212e;
+    /* background-color: #01212e; */
     color: #ffffff;
   }
 
@@ -36,7 +38,10 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-top: 10vh;
+    /* margin-left: calc(30vw - 240px); */
     /* margin-top 10vw = 10% dari width window*/
+    /* background-color: red; */
   }
 
   

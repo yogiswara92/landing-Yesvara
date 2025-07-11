@@ -1,48 +1,55 @@
 <style>
   .chat-page {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    width: calc(90vw - 300px); /*  sidebar 300px */
-    max-width: 100%;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* width: calc(99vw - 290px);  sidebar 300px */
+   width:100%;
     color: white;
     margin: 0 auto;
+    /* background-color: red; */
+    padding-top:60px;
   }
 
   .chat-messages {
     flex: 1;
-    padding: 1rem;
+    /* padding: 0.5rem; */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 100%;
+    /* width: calc(99vw - 290px); */
+    width:100%;
+    
+    /* background-color: grey; */
   }
 
   .message {
     padding: 0.75rem 1rem;
     border-radius: 12px;
-    max-width: 100%;
+    /* max-width: calc(99vw - 280px); */
   }
 
   .message.user {
     align-self: flex-end;
-    background-color: #0084ff;
+    background-color: #BE8F0260;
     color: white;
     text-align: left;
-    margin-right:-15px;
+    margin-left:15px;
+    /* margin-right:-15px; */
   }
 
   .message.bot {
     align-self: flex-start;
-    background-color: #2d2d2d;
+    /* background-color: #2d2d2d; */
     color: #ddd;
     text-align: left;
-    width:99%;
+    /* max-width:99%; */
     box-sizing: border-box;
     word-break: break-word;
     overflow-wrap: anywhere;
-    margin-left:-15px;
+    /* margin-left:-15px; */
+    border-bottom: 1px solid #ffffff20;
+    border-radius: 0px;
   }
 
   .message.bot p,
@@ -57,20 +64,21 @@
   }
 
   :global(.scrollable-code) {
-    width: calc(90vw-300px);
+    width: calc(99vw - 300px);
+    /* width:100%; */
     overflow-x: auto;
   }
 
   @media(max-width: 768px) {
     :global(.scrollable-code) {
-      width: 70vw;
+      width: 90vw;
     }
     .chat-page {
-      width: 80vw;
-      margin-left:-20px;
+      width: 100%;
+      /* margin-left:-20px; */
     }
     .chat-messages {
-      width:80vw;  
+      width:100%;  
     }
   }
 
@@ -80,6 +88,7 @@
     border-radius: 8px;
     overflow-x: auto;
     white-space: pre;
+    font-size:12px;
   }
 
   :global(code) {
@@ -87,17 +96,18 @@
     white-space: pre;
   }
 
-  table {
+  :global(table) {
     border-collapse: collapse;
-    width: 100%;
+    max-width: 100%;
     margin-top: 0.5rem;
   }
 
-  table, th, td {
+  :global(table, th, td) {
     border: 1px solid #999;
+    font-size:12px;
   }
 
-  th, td {
+  :global(th, td) {
     padding: 8px;
     text-align: left;
   }
@@ -111,6 +121,8 @@
 </style>
 
 <script>
+// @ts-nocheck
+
   import Chatinput from '../component/Chat-input.svelte';
   import { getChatWeb } from '../lib/api.js';
   import { afterUpdate } from 'svelte';
@@ -214,7 +226,7 @@
         </div>
       {/each}
       {#if proses}
-        <i style="text-align:left;margin-bottom: 30px">{proses}</i>
+        <i style="text-align:left;margin-bottom: 30px; margin-left:20px">{proses}</i>
       {/if}
       <div bind:this={bottomRef}></div>
     </div>

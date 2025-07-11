@@ -5,7 +5,8 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #01212e;
+  background-color:rgba(1, 33, 46, 0.95);
+;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -29,6 +30,7 @@ body {
   min-width: 320px;
   bottom: 2rem;
   height: 100dvh;
+  
 }
 
 h1 {
@@ -41,11 +43,13 @@ h1 {
 }
 
 #app {
-  max-width: 1280px;
+  /* max-width: 1280px; */
+  width:98%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0.2rem;
   text-align: center;
-  background-color: #01212e;
+  /* background-color: #01212e90; */
+  /* background-color: white; */
 }
 
 button {
@@ -70,7 +74,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #01212e;
+    /* background-color: #01212e; */
   }
   a:hover {
     color: #747bff;
@@ -84,7 +88,7 @@ button:focus-visible {
   :global(body) {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    background-color: #01212e;
+    /* background-color: #01212e; */
     color: white;
   }
 
@@ -188,10 +192,11 @@ button:focus-visible {
     flex-direction: column;
     align-items: center;
     position: relative;
-    width: 99%;
+    /* width: calc(99vw - 290px); */
+    width:100%;
     margin: 0 auto;
-    margin-left:20px;
     padding-bottom: 80px; /* ruang untuk input bar */
+    /* background-color: pink; */
   }
 
   .chat-input-wrapper {
@@ -204,6 +209,7 @@ button:focus-visible {
     z-index: 999;
     padding-bottom: 0.5rem;
      z-index: 998;
+     /* background-color: yellow; */
   }
 
   @media (max-width: 768px) {

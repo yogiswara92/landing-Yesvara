@@ -83,7 +83,7 @@
 <style>
   .chat-bar {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.4rem;
     display: flex;
     justify-content: center;
     background: transparent;
