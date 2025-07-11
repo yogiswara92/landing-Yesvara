@@ -14,6 +14,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  background-color: transparent !important;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -48,7 +52,7 @@ h1 {
   margin: 0 auto;
   padding: 0.2rem;
   text-align: center;
-  /* background-color: #01212e90; */
+  /* background-color: #ffffff10; */
   /* background-color: white; */
 }
 
@@ -88,8 +92,9 @@ button:focus-visible {
   :global(body) {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    /* background-color: #01212e; */
+    /* background-color: #ffffff; */
     color: white;
+    background-color: transparent !important;
   }
 
   .container {
