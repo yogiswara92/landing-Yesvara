@@ -181,6 +181,7 @@
         if (item.answer) messages = [...messages, { role: 'bot', text: item.answer }];
       });
     }
+    
   }
 
   async function submitToN8n(message) {
@@ -190,7 +191,7 @@
         'Content-Type': 'application/json',
         'auth': `${import.meta.env.VITE_YESVARA_AUTH}`
       },
-      body: JSON.stringify({ message, credential, nama })
+      body: JSON.stringify({ message, credential, nama, prev_message: messages.slice(-20)  })
     });
 
     if (res) {
@@ -208,7 +209,7 @@
     if (/```(\w+)?\n([\s\S]*?)```/gm.test(text)) {
       text = text.replace(/```(\w+)?\n([\s\S]*?)```/gm, (match, lang, code) => {
         const highlighted = hljs.highlightAuto(code, [lang]).value;
-        return `<div class="scrollable-code" ><pre ><code class="hljs language-${lang}" >${highlighted}</code></pre></div>`;
+        return `<div class="scrollable-code"  ><pre ><code class="hljs language-${lang}" >${highlighted}</code></pre></div>`;
       });
       return text;
     }
@@ -223,7 +224,7 @@
   <div class="chat-page">
     <div class="chat-messages">
       {#each messages as msg}
-        <div class="message {msg.role}">
+        <div class="message {msg.role}" >
           {@html renderFormattedMessage(msg.text)}
         </div>
       {/each}

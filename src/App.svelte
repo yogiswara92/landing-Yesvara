@@ -28,6 +28,14 @@
     const hash = new URLSearchParams(window.location.hash.slice(1));
     const accessToken = hash.get("access_token");
 
+    // Khusus testing:
+      // nama = "Yogiswara Gheartha";
+      // email="tesyogiswaragheartha@gmail.com";
+      // localStorage.setItem("nama", nama);
+      // localStorage.setItem("email", email);
+    // -------------
+
+    email="yogiswaragheartha@gmail.com";
     if (accessToken) {
       localStorage.setItem("access_token", accessToken);
       history.replaceState(null, '', window.location.pathname);
