@@ -35,7 +35,7 @@
       // localStorage.setItem("email", email);
     // -------------
 
-    email="yogiswaragheartha@gmail.com";
+    //email="yogiswaragheartha@gmail.com";
     if (accessToken) {
       localStorage.setItem("access_token", accessToken);
       history.replaceState(null, '', window.location.pathname);
