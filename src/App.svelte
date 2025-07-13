@@ -22,7 +22,7 @@
   let nama = 'Guest';
   let email = '';
   let isLoggedIn = false;
-  let sidebarOpen = true;
+  let sidebarOpen = false;
 
   onMount(() => {
     const hash = new URLSearchParams(window.location.hash.slice(1));
