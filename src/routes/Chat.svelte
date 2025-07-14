@@ -174,14 +174,21 @@
   }
 
   async function ambilChat() {
-    const res = await getChatWeb(credential);
-    if (res) {
-      res.forEach(item => {
-        if (item.message) messages = [...messages, { role: 'user', text: item.message }];
-        if (item.answer) messages = [...messages, { role: 'bot', text: item.answer }];
-      });
+    if(localStorage.getItem("chatMessages")){
+      messages = JSON.parse(localStorage.getItem("chatMessages"));
+    }else{
+      const res = await getChatWeb(credential);
+      if (res) {
+        res.forEach(item => {
+          if (item.message) messages = [...messages, { role: 'user', text: item.message }];
+          if (item.answer) messages = [...messages, { role: 'bot', text: item.answer }];
+        });
+        
+        localStorage.setItem("chatMessages", JSON.stringify(messages));
+        // console.log(JSON.parse(localStorage.getItem("chatMessages")));
+      }
     }
-    
+    console.log(messages);
   }
 
   async function submitToN8n(message) {
@@ -201,9 +208,14 @@
       messages = [...messages, { role: 'bot', text: `maaf, boleh dijelaskan lagi?` }];
     }
     proses = "";
+    localStorage.setItem("chatMessages", JSON.stringify(messages));
   }
 
   function renderFormattedMessage(text) {
+    // if (typeof text !== 'string') {
+    //   return `<i style="color:gray">[teks tidak tersedia]</i>`;
+    // }
+
     if (text.includes('<table')) return text;
 
     if (/```(\w+)?\n([\s\S]*?)```/gm.test(text)) {
