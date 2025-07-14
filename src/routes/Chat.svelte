@@ -188,7 +188,7 @@
         // console.log(JSON.parse(localStorage.getItem("chatMessages")));
       }
     }
-    console.log(messages);
+    // console.log(messages);
   }
 
   async function submitToN8n(message) {
