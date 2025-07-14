@@ -37,6 +37,7 @@
 
     //email="yogiswaragheartha@gmail.com";
     if (accessToken) {
+      localStorage.clear();
       localStorage.setItem("access_token", accessToken);
       history.replaceState(null, '', window.location.pathname);
       getGoogleUserProfile(accessToken);
