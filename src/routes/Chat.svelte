@@ -38,7 +38,7 @@
   }
 
   afterUpdate(() => {
-    bottomRef?.scrollIntoView({ behavior: 'smooth' });
+   // bottomRef?.scrollIntoView({ behavior: 'smooth' });
   });
 
   function handleSend(message) {
