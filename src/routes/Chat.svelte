@@ -1,134 +1,8 @@
-<style>
-  .chat-page {
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* width: calc(99vw - 290px);  sidebar 300px */
-   width:100%;
-    color: white;
-    margin: 0 auto;
-    /* background-color: red; */
-    padding-top:60px;
-  }
-
-  .chat-messages {
-    flex: 1;
-    /* padding: 0.5rem; */
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    /* width: calc(99vw - 290px); */
-    width:100%;
-    
-    /* background-color: grey; */
-  }
-
-  .message {
-    padding: 0.75rem 1rem;
-    border-radius: 12px;
-    /* max-width: calc(99vw - 280px); */
-  }
-
-  .message.user {
-    align-self: flex-end;
-    background-color: #BE8F0260;
-    color: white;
-    text-align: left;
-    margin-left:15px;
-    /* margin-right:-15px; */
-  }
-
-  .message.bot {
-    align-self: flex-start;
-    /* background-color: #2d2d2d; */
-    color: #ddd;
-    text-align: left;
-    /* max-width:99%; */
-    box-sizing: border-box;
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    /* margin-left:-15px; */
-    border-bottom: 1px solid #ffffff20;
-    border-radius: 0px;
-  }
-
-  .message.bot p,
-  .message.bot div {
-    margin: 0;
-    padding: 0;
-  }
-
-  .message.bot strong,
-  .message.bot em {
-    color: #BE8F02;
-  }
-
-  :global(.scrollable-code) {
-    width: calc(99vw - 300px);
-    /* width:100%; */
-    overflow-x: auto;
-  }
-
-  @media(max-width: 768px) {
-    :global(.scrollable-code) {
-      width: 90vw;
-    }
-    .chat-page {
-      width: 100%;
-      /* margin-left:-20px; */
-    }
-    .chat-messages {
-      width:100%;  
-    }
-  }
-
-  :global(pre) {
-    background: #1e1e1e;
-    padding: 10px;
-    border-radius: 8px;
-    overflow-x: auto;
-    white-space: pre;
-    font-size:12px;
-    line-height: 1;
-  }
-
-  :global(code) {
-    font-family: monospace;
-    white-space: pre;
-  }
-
-  :global(table) {
-    border-collapse: collapse;
-    max-width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  :global(table, th, td) {
-    border: 1px solid #99999950;
-    font-size:12px;
-    line-height: 1;
-  }
-
-  :global(th, td) {
-    padding: 8px;
-    text-align: left;
-  }
-
-  :global(th) {
-    background-color: #01212e98;
-    color: #fff;
-  }
-
-  
-</style>
-
 <script>
-// @ts-nocheck
-
+  // @ts-nocheck
   import Chatinput from '../component/Chat-input.svelte';
   import { getChatWeb } from '../lib/api.js';
   import { afterUpdate } from 'svelte';
-
   import { marked } from 'marked';
   import hljs from 'highlight.js';
   import 'highlight.js/styles/github-dark.css';
@@ -140,6 +14,7 @@
   let credential = "";
   let nama = "";
   let bottomRef;
+  let clickedMessageIndex = null;
   let isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   marked.setOptions({
@@ -174,21 +49,18 @@
   }
 
   async function ambilChat() {
-    if(localStorage.getItem("chatMessages")){
+    if (localStorage.getItem("chatMessages")) {
       messages = JSON.parse(localStorage.getItem("chatMessages"));
-    }else{
+    } else {
       const res = await getChatWeb(credential);
       if (res) {
         res.forEach(item => {
           if (item.message) messages = [...messages, { role: 'user', text: item.message }];
           if (item.answer) messages = [...messages, { role: 'bot', text: item.answer }];
         });
-        
         localStorage.setItem("chatMessages", JSON.stringify(messages));
-        // console.log(JSON.parse(localStorage.getItem("chatMessages")));
       }
     }
-    // console.log(messages);
   }
 
   async function submitToN8n(message) {
@@ -198,7 +70,7 @@
         'Content-Type': 'application/json',
         'auth': `${import.meta.env.VITE_YESVARA_AUTH}`
       },
-      body: JSON.stringify({ message, credential, nama, prev_message: messages.slice(-20)  })
+      body: JSON.stringify({ message, credential, nama, prev_message: messages.slice(-20) })
     });
 
     if (res) {
@@ -212,37 +84,177 @@
   }
 
   function renderFormattedMessage(text) {
-    // if (typeof text !== 'string') {
-    //   return `<i style="color:gray">[teks tidak tersedia]</i>`;
-    // }
-
     if (text.includes('<table')) return text;
 
     if (/```(\w+)?\n([\s\S]*?)```/gm.test(text)) {
       text = text.replace(/```(\w+)?\n([\s\S]*?)```/gm, (match, lang, code) => {
         const highlighted = hljs.highlightAuto(code, [lang]).value;
-        return `<div class="scrollable-code"  ><pre ><code class="hljs language-${lang}" >${highlighted}</code></pre></div>`;
+        return `<div class="scrollable-code"><pre><code class="hljs language-${lang}">${highlighted}</code></pre></div>`;
       });
       return text;
     }
 
     return marked(text);
   }
+
+  function toggleMenu(index) {
+    if (!isMobile) return;
+    clickedMessageIndex = clickedMessageIndex === index ? null : index;
+  }
+
+  function deleteMessage(index) {
+    messages.splice(index, 2);
+    messages = [...messages];
+    localStorage.setItem("chatMessages", JSON.stringify(messages));
+  }
+
+  function copyMessage(text) {
+    navigator.clipboard.writeText(text);
+    alert("Teks disalin!");
+  }
 </script>
 
+<style>
+  .chat-page {
+    width: 100%;
+    color: white;
+    margin: 0 auto;
+    padding-top: 60px;
+  }
 
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .message {
+    position: relative;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+  }
+
+  .message.user {
+    align-self: flex-end;
+    background-color: #BE8F0260;
+    color: white;
+    text-align: left;
+    margin-left: 15px;
+  }
+
+  .message.bot {
+    align-self: flex-start;
+    color: #ddd;
+    text-align: left;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    border-bottom: 1px solid #ffffff20;
+    border-radius: 0px;
+  }
+
+  .user-menu {
+    display: none;
+    position: absolute;
+    bottom: -20px;
+    right: 0px;
+    /*background: #33333390;
+    border: 1px solid #555;*/
+    border-radius: 6px;
+    z-index: 99;
+    gap: 1px;
+  }
+
+  .message.user:hover .user-menu,
+  .user-menu.show {
+    display: flex;
+    
+  }
+
+  .user-menu button {
+    background: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    width:60px;
+    padding:3px;
+    
+  }
+
+  :global(.scrollable-code) {
+    width: calc(99vw - 300px);
+    overflow-x: auto;
+  }
+
+  @media(max-width: 768px) {
+    :global(.scrollable-code) {
+      width: 90vw;
+    }
+    .chat-page {
+      width: 100%;
+    }
+    .chat-messages {
+      width: 100%;
+    }
+  }
+
+  :global(pre) {
+    background: #1e1e1e;
+    padding: 10px;
+    border-radius: 8px;
+    overflow-x: auto;
+    white-space: pre;
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  :global(code) {
+    font-family: monospace;
+    white-space: pre;
+  }
+
+  :global(table, th, td) {
+    border: 1px solid #99999950;
+    font-size: 12px;
+    line-height: 1;
+    padding: 8px;
+  }
+
+  :global(th) {
+    background-color: #01212e98;
+    color: #fff;
+  }
+</style>
 
 <div class="chat-wrapper">
   <div class="chat-page">
     <div class="chat-messages">
-      {#each messages as msg}
-        <div class="message {msg.role}" >
+      {#each messages as msg, index}
+        <div
+          class="message {msg.role}"
+          on:click={() => msg.role === 'user' && toggleMenu(index)}
+        >
           {@html renderFormattedMessage(msg.text)}
+
+          {#if msg.role === 'user'}
+            <div class="user-menu {isMobile && clickedMessageIndex === index ? 'show' : ''}">
+              <button on:click|stopPropagation={() => copyMessage(msg.text)}>📋 Copy</button>
+              <button on:click|stopPropagation={() => deleteMessage(index)}>🗑️ Delete</button>
+            </div>
+          {/if}
         </div>
       {/each}
+
       {#if proses}
         <i style="text-align:left;margin-bottom: 30px; margin-left:20px">{proses}</i>
       {/if}
+
       <div bind:this={bottomRef}></div>
     </div>
 
