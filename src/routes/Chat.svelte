@@ -46,17 +46,21 @@
   });
 
   afterUpdate(() => {
-   // bottomRef?.scrollIntoView({ behavior: 'smooth' });
+    //bottomRef?.scrollIntoView({ behavior: 'smooth' });
   });
 
   function handleSend(message) {
     if (!message) return;
     proses = "typing..";
+    bottomRef?.scrollIntoView({ behavior: 'smooth' });
     submitToN8n(message);
     messages = [...messages, { role: 'user', text: message }];
   }
 
   async function ambilChat() {
+    messages = [
+      { role: 'bot', text: `Hai, Saya Yesvara, AI Agent yang diciptakan oleh Yogiswara. Ada yang bisa saya bantu?` }
+    ];
     if (localStorage.getItem("chatMessages")) {
       messages = JSON.parse(localStorage.getItem("chatMessages"));
     } else {
