@@ -2,7 +2,7 @@
   // @ts-nocheck
   import Chatinput from '../component/Chat-input.svelte';
   import { getChatWeb } from '../lib/api.js';
-  import { afterUpdate } from 'svelte';
+  import { onMount,afterUpdate } from 'svelte';
   import { marked } from 'marked';
   import hljs from 'highlight.js';
   import 'highlight.js/styles/github-dark.css';
@@ -36,6 +36,14 @@
         ambilChat();
       });
   }
+
+  onMount(() => {
+    if (performance.navigation.type === 1) {
+      // 1 = reload
+      localStorage.removeItem("chatMessages");
+      ambilChat();
+    }
+  });
 
   afterUpdate(() => {
    // bottomRef?.scrollIntoView({ behavior: 'smooth' });
