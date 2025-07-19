@@ -2,7 +2,7 @@
   // @ts-nocheck
   import Chatinput from '../component/Chat-input.svelte';
   import { getChatWeb } from '../lib/api.js';
-  import { onMount,afterUpdate } from 'svelte';
+  import { tick, onMount,afterUpdate } from 'svelte';
   import { marked } from 'marked';
   import hljs from 'highlight.js';
   import 'highlight.js/styles/github-dark.css';
@@ -49,12 +49,14 @@
     //bottomRef?.scrollIntoView({ behavior: 'smooth' });
   });
 
-  function handleSend(message) {
+  async function handleSend(message) {
     if (!message) return;
     proses = "typing..";
+    messages = [...messages, { role: 'user', text: message }];
+    await tick();
     bottomRef?.scrollIntoView({ behavior: 'smooth' });
     submitToN8n(message);
-    messages = [...messages, { role: 'user', text: message }];
+    
   }
 
   async function ambilChat() {
@@ -88,6 +90,9 @@
     if (res) {
       const data = await res.json();
       messages = [...messages, { role: 'bot', text: `${data[0].output}` }];
+
+      await tick();
+      bottomRef?.scrollIntoView({ behavior: 'smooth' });
     } else {
       messages = [...messages, { role: 'bot', text: `maaf, boleh dijelaskan lagi?` }];
     }
