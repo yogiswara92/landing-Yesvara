@@ -107,12 +107,12 @@
     color:black;
     border: none;
     outline: none;
-    font-size: 1rem;
+    font-size: 16px;
     resize: none;
     overflow-y: auto;
     font-family: inherit;
     min-height: 1.5rem;
-    height: 12px;
+    height: 16px;
   }
 
   button {

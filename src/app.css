@@ -146,6 +146,7 @@ button:focus-visible {
     margin-bottom: 10px;
     background-color: white;
     color:black;
+    font-size: 16px;
   }
 
   input[disabled] {
@@ -159,6 +160,7 @@ button:focus-visible {
     border-radius: 8px;
     width: 250px;
     height:50px;
+    font-size: 16px;
     text-align: left;
     border: none;
     background-color: white;
