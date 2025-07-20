@@ -16,6 +16,7 @@
   let bottomRef;
   let clickedMessageIndex = null;
   let isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  let LLM = "yes-lite";
 
   marked.setOptions({
     highlight: function (code, lang) {
@@ -51,11 +52,26 @@
 
   async function handleSend(message) {
     if (!message) return;
+    //console.log(messages.slice(-20));
     proses = "typing..";
     messages = [...messages, { role: 'user', text: message }];
     await tick();
     bottomRef?.scrollIntoView({ behavior: 'smooth' });
     submitToN8n(message);
+    
+  }
+
+  function handleConfigChange(config) {
+    
+    if(config=="Yes Lite"){
+      LLM="yes-lite";
+    }else if(config=="Yes Basic"){
+      LLM="yes-basic";
+    }else if(config=="Yes Advanced"){
+      LLM="yes-advanced";
+    }else if(config=="Deep Research"){
+      LLM="deep-research";
+    }
     
   }
 
@@ -84,7 +100,7 @@
         'Content-Type': 'application/json',
         'auth': `${import.meta.env.VITE_YESVARA_AUTH}`
       },
-      body: JSON.stringify({ message, credential, nama, prev_message: messages.slice(-20) })
+      body: JSON.stringify({ message, credential, nama, LLM, prev_message: messages.slice(-20) })
     });
 
     if (res) {
@@ -197,11 +213,10 @@
     border: none;
     cursor: pointer;
     font-size: 12px;
-    display: flex;
     align-items: center;
-    width:60px;
+    width:70px;
     padding:3px;
-    
+    text-align:right;
   }
 
   :global(.scrollable-code) {
@@ -276,7 +291,10 @@
     </div>
 
     <div class="chat-input-wrapper">
-      <Chatinput on:send={(e) => handleSend(e.detail)} />
+      <Chatinput 
+        on:send={(e) => handleSend(e.detail)} 
+        on:configChange={(e) => handleConfigChange(e.detail)} 
+      />
     </div>
   </div>
 </div>
