@@ -278,8 +278,9 @@
           <div class="config-menu">
             <button on:click={() => selectLLMConfig('Yes Lite')}>Yes Lite</button>
             <button on:click={() => selectLLMConfig('Yes Basic')}>Yes Basic</button>
-            <button disabled class="disabled-option">Yes Advanced</button>
-            <button disabled class="disabled-option">Deep Research</button>
+            <button on:click={() => selectLLMConfig('Yes Advanced')}>Yes Advanced</button>
+            <button on:click={() => selectLLMConfig('Deep Research')}>Deep Research</button>
+            <!--<button disabled class="disabled-option">Deep Research</button>-->
           </div>
         {/if}
       </div>
