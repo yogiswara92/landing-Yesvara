@@ -71,6 +71,8 @@
       LLM="yes-advanced";
     }else if(config=="Deep Research"){
       LLM="deep-research";
+    }else if(config=="Web Summary"){
+      LLM="web-summary";
     }
     
   }

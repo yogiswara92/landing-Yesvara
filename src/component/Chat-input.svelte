@@ -9,6 +9,7 @@
   let isMobile = false;
   let showConfigMenu = false;
   let selectedConfig = 'Yes Lite';
+  let placeholderChat="Ask anything...";
 
   isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
@@ -60,6 +61,11 @@
     showConfigMenu = false;
     dispatch('configChange', config)
     //console.log(config);
+    if(config=="Web Summary"){
+      placeholderChat="Input Link...";
+    }else{
+      placeholderChat="Ask anything...";
+    }
   }
 
   onMount(() => {
@@ -262,7 +268,7 @@
     <textarea
       bind:this={inputEl}
       rows="1"
-      placeholder="Ask anything..."
+      placeholder={placeholderChat}
       on:input={autoResize}
       on:focus={onFocusScroll}
       on:keydown={handleKeyDown}
@@ -279,6 +285,7 @@
             <button on:click={() => selectLLMConfig('Yes Lite')}>Yes Lite</button>
             <button on:click={() => selectLLMConfig('Yes Basic')}>Yes Basic</button>
             <button on:click={() => selectLLMConfig('Yes Advanced')}>Yes Advanced</button>
+            <button on:click={() => selectLLMConfig('Web Summary')}>Web Summary</button>
             <button disabled class="disabled-option">Deep Research</button>
             <!--<button disabled class="disabled-option">Deep Research</button>-->
           </div>
